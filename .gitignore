@@ -1,0 +1,4 @@
+*.pyc
+*.pyo
+__pychache__
+db.sqlite3
