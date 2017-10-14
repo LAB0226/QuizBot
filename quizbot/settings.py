@@ -25,7 +25,7 @@ SECRET_KEY = '&m^!72yet)m0ms=^*32*b@iw55ac7+&00t9#*=$x-brx=uzzt$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['quizbot-shirokuma4690.c9users.io','ec2-54-64-94-237.ap-northeast-1.compute.amazonaws.com:8000']
+ALLOWED_HOSTS = ['quizbot-shirokuma4690.c9users.io','ec2-54-64-94-237.ap-northeast-1.compute.amazonaws.com']
 
 
 # Application definition
