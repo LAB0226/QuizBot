@@ -20,5 +20,6 @@ from chat_app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^callback', views.callback)
+    url(r'^index/', views.index),
+    url(r'^callback/', views.callback)
 ]
