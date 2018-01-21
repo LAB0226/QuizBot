@@ -118,3 +118,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 環境変数からアクセストークンを取得する
+LINE_ACCESS_TOKEN = os.environ['LINE_ACCESS_TOKEN']
