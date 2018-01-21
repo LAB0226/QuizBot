@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.conf import settings
 
 import requests
 import json
@@ -30,10 +31,9 @@ def callback(request):
 # LINE_APIに返事を送る
 #----------------------------
 REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
-ACCESS_TOKEN = 'uzvNY66qyX1+swPd8r1H+2AjgHHhlLJV/WXnz/HamUnm48zyOj7xg7J5jXY3tG3WIQBWBhkxffLs5jwdo2T8J4/FueB04eL3JzaZJyxIDCDxfee4P+lECThQbwOh4gGN8zpoya/VoknStuk7MiusMwdB04t89/1O/w1cDnyilFU='
 HEADER = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + ACCESS_TOKEN,
+    "Authorization": "Bearer " + settings.LINE_ACCESS_TOKEN,
     "method": "POST"
 }
 
