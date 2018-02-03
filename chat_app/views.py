@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
+from richmenu    import Richmenu, RichMenuManager
 
 import requests
 import json
@@ -51,4 +52,18 @@ def reply_text(reply_token, text):
 
     requests.post(REPLY_ENDPOINT, headers=HEADER, data=json.dumps(payload)) # LINEにデータを送信
     return reply
+
+#----------------------------------
+# リッチメニューの表示処理
+#----------------------------------
+  channel_access_token = settings.LINE_ACCESS_TOKEN
+  rmm = RichMenuManager(channel_access_token)
+  rm = RichMenu(name="Test menu", chat_bar_text="Open this menu")
+    rm.add_area(551, 325, 321, 321, "message", "up")
+    rm.add_area(876, 651, 321, 321, "message", "right")
+    rm.add_area(225, 651, 321, 321, "message", "left")
+    rm.add_area(551, 972, 321, 321, "message", "down")
+    rm.add_area(1907, 657, 367, 367, "message", "btn a")
+    rm.add_area(1433, 657, 367, 367, "message", "btn b")
+
 #-----------------------------
