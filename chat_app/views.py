@@ -69,4 +69,9 @@ def reply_text(reply_token, text):
     rm.add_area(1907, 657, 367, 367, "message", "btn a")
     rm.add_area(1433, 657, 367, 367, "message", "btn b")
 
+# Register
+res = rmm.register(rm, "/path/to/test_richmenu.png")
+richmenu_id = res["richMenuId"]
+print("Registered as " + richmenu_id)
+
 #-----------------------------
