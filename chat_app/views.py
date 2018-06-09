@@ -5,6 +5,7 @@ from django.conf import settings
 
 import requests
 import json
+import logging
 
 #----------------------------------
 # 動作確認用
@@ -48,6 +49,8 @@ def reply_text(reply_token, text):
                 }
             ]
     }
+    
+    logging.debug(HEADER)
 
     requests.post(REPLY_ENDPOINT, headers=HEADER, data=json.dumps(payload)) # LINEにデータを送信
     return reply
