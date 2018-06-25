@@ -1,10 +1,6 @@
 import json
 import requests
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 67fccbe5bb1060c8d91620c2c5b7a3ece6b56e58
 class RichMenu:
     def __init__(self, name, chat_bar_text, size_full=True, selected=False):
         self.size = {"width": 2500, "height": 1686}

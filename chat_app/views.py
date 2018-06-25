@@ -2,7 +2,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
-from richmenu    import Richmenu, RichMenuManager
+from richmenu import RichMenu
+from richmenu import RichMenuManager
 
 import requests
 import json
