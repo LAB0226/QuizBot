@@ -2,8 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
-from richmenu import RichMenu
-from richmenu import RichMenuManager
+from richmenu    import Richmenu, RichMenuManager
 
 import requests
 import json
@@ -77,4 +76,3 @@ def reply_text(reply_token, text):
 
     requests.post(REPLY_ENDPOINT, headers=HEADER, data=json.dumps(payload)) # LINEにデータを送信
     return reply
-
