@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '&m^!72yet)m0ms=^*32*b@iw55ac7+&00t9#*=$x-brx=uzzt$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['quizbot-shirokuma4690.c9users.io','ec2-54-64-94-237.ap-northeast-1.compute.amazonaws.com']
+ALLOWED_HOSTS = ['quizbot-shirokuma4690.c9users.io','ec2-54-64-94-237.ap-northeast-1.compute.amazonaws.com','18.179.12.13']
 
 
 # Application definition
@@ -118,3 +119,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 環境変数からアクセストークンを取得する
+LINE_ACCESS_TOKEN = os.environ['LINE_ACCESS_TOKEN']
+
+# ログ出力用
+if DEBUG:
+    # will output to your console
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+    )
+else:
+    # will output to logging file
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = '/my_log_file.log',
+        filemode = 'a'
+    )

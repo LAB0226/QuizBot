@@ -1,10 +1,33 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.conf import settings
+from richmenu import RichMenu
+from richmenu import RichMenuManager
 
 import requests
 import json
+import logging
 
+#----------------------------------
+# リッチメニューの表示処理
+#----------------------------------
+def richmenu_regist(user_id):
+    channel_access_token = settings.LINE_ACCESS_TOKEN
+    rmm = RichMenuManager(channel_access_token)
+    rm = RichMenu(name="Test menu", chat_bar_text="Open this menu")
+    rm.add_area(551, 325, 321, 321, "message", "up")
+    rm.add_area(876, 651, 321, 321, "message", "right")
+    rm.add_area(225, 651, 321, 321, "message", "left")
+    rm.add_area(551, 972, 321, 321, "message", "down")
+    rm.add_area(1907, 657, 367, 367, "message", "btn a")
+    rm.add_area(1433, 657, 367, 367, "message", "btn b")
+    res = rmm.register(rm, "/home/ec2-user/QuizBot/chat_app/test_richmenu.png")
+    richmenu_id = res["richMenuId"]
+    print("***** Registered as " + richmenu_id)
+    rmm.apply(user_id,richmenu_id)
+
+#-----------------------------
 #----------------------------------
 # 動作確認用
 #----------------------------------
@@ -24,16 +47,17 @@ def callback(request):
         if message_type == 'text':
             text = e['message']['text']    # 受信メッセージの取得
             reply += reply_text(reply_token, text)   # LINEにセリフを送信する関数
+    richmenu_regist(request_json['events'][0]['source']['userId'])
+    print(request_json)
     return HttpResponse(reply)  # テスト用
 
 #----------------------------
 # LINE_APIに返事を送る
 #----------------------------
 REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
-ACCESS_TOKEN = 'uzvNY66qyX1+swPd8r1H+2AjgHHhlLJV/WXnz/HamUnm48zyOj7xg7J5jXY3tG3WIQBWBhkxffLs5jwdo2T8J4/FueB04eL3JzaZJyxIDCDxfee4P+lECThQbwOh4gGN8zpoya/VoknStuk7MiusMwdB04t89/1O/w1cDnyilFU='
 HEADER = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + ACCESS_TOKEN,
+    "Authorization": "Bearer " + settings.LINE_ACCESS_TOKEN,
     "method": "POST"
 }
 
@@ -48,7 +72,8 @@ def reply_text(reply_token, text):
                 }
             ]
     }
+    
+    logging.debug(HEADER)
 
     requests.post(REPLY_ENDPOINT, headers=HEADER, data=json.dumps(payload)) # LINEにデータを送信
     return reply
-#-----------------------------
