@@ -16,13 +16,12 @@ def richmenu_regist(user_id):
     channel_access_token = settings.LINE_ACCESS_TOKEN
     rmm = RichMenuManager(channel_access_token)
     rm = RichMenu(name="Test menu", chat_bar_text="Open this menu")
-    rm.add_area(551, 325, 321, 321, "message", "up")
-    rm.add_area(876, 651, 321, 321, "message", "right")
-    rm.add_area(225, 651, 321, 321, "message", "left")
-    rm.add_area(551, 972, 321, 321, "message", "down")
-    rm.add_area(1907, 657, 367, 367, "message", "btn a")
-    rm.add_area(1433, 657, 367, 367, "message", "btn b")
-    res = rmm.register(rm, "/home/ec2-user/QuizBot/chat_app/test_richmenu.png")
+    rm.add_area(300, 202, 600, 405, "message", "A")
+    rm.add_area(900, 202, 600, 405, "message", "B")
+    rm.add_area(300, 607, 600, 405, "message", "C")
+    rm.add_area(900, 607, 600, 405, "message", "D")
+
+    res = rmm.register(rm, "/home/ec2-user/QuizBot/chat_app/images/choice_sample.jpg")
     richmenu_id = res["richMenuId"]
     print("***** Registered as " + richmenu_id)
     rmm.apply(user_id,richmenu_id)
